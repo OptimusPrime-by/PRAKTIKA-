@@ -1,0 +1,240 @@
+Дан массив. Вывести на экран сначала его неотрицательные элементы, затем отрицательные.
+
+#include<iostream>
+#include<ctime>
+using namespace std;
+int main()
+{
+	setlocale(LC_ALL, "russian");
+	int m;
+	
+	cout << "Введите колличество элементов в массиве: ";
+	cin >> m ;
+
+	int* M = new int[m];
+
+	
+
+	srand(time(NULL));
+	for (int i = 0; i < m; i++)
+	{
+		M[i] = -20 + rand() % 200;
+
+	}
+
+	for (int i = 0; i < m; i++)
+	{
+
+		cout << "[" << i + 1 << "] = " << M[i] << endl ;
+		
+
+	}
+
+	cout << "Отсортированный массив: \n";
+
+	int temp;
+
+	for (int i = 0; i < m - 1; i++) {
+		for (int j = 0; j < m - i - 1; j++) {
+			if (M[j + 1] > M[j]) {
+				// меняем элементы местами
+				temp = M[j];
+				M[j] = M[j + 1];
+				M[j + 1] = temp;
+			}
+		}
+	}
+
+	// Вывод отсортированного массива на экран
+	for (int i = 0; i < m; i++) 
+	{
+		cout << "[" << i + 1 << "] = " << M[i] << endl;
+	}
+	
+	
+	return 0;
+}
+
+Дан массив, упорядоченный по возрастанию, и число а, о котором известно следующее:
+ оно не равно ни одному из элементов массива, большее первого и меньшее последнего элемента.
+Б) Найти два элемента массива (их порядковые номера и значение), 
+в интервале, между которыми находится значение n
+#include<iostream>
+#include<ctime>
+#include<cmath>
+using namespace std;
+int main()
+{
+	setlocale(LC_ALL, "russian");
+	int m;
+
+	cout << "Введите колличество элементов в массиве: ";
+	cin >> m;
+
+	int* M = new int[m];
+
+
+
+	srand(time(NULL));
+	for (int i = 0; i < m; i++)
+	{
+		M[i] = -20 + rand() % 200;
+
+	}
+
+	for (int i = 0; i < m; i++)
+	{
+
+		cout << "[" << i + 1 << "] = " << M[i] << endl;
+
+
+	}
+
+	cout << "Отсортированный массив: \n";
+
+	int temp;
+
+	for (int i = 0; i < m - 1; i++) {
+		for (int j = 0; j < m - i - 1; j++) {
+			if (M[j] > M[j + 1]) {
+				// меняем элементы местами
+				temp = M[j];
+				M[j] = M[j + 1];
+				M[j + 1] = temp;
+			}
+		}
+	}
+
+	// Вывод отсортированного массива на экран
+	for (int i = 0; i < m; i++)
+	{
+		cout << "[" << i + 1 << "] = " << M[i] << endl;
+	}
+
+	//Пункт б
+	int a;
+	cout << "Введите элемент а: ";
+	cin >> a;
+
+	for (int i = m - 1; i >= 0; i--) {
+		if (a != M[i] && a > M[0] && a < M[m - 1])
+		{
+			if (M[i] < a) {
+				cout << "[" << i + 1 << "] = " << M[i];
+				break;
+			}
+
+		}
+	}
+
+	for (int i = 0; i < m; i++) {
+		if (a != M[i] && a > M[0] && a < M[m-1])
+		{
+			if (M[i] > a) {
+				cout << "\n[" << i + 1 << "] = " << M[i];
+				break;
+			}
+			
+		}
+	}
+
+	
+
+	
+
+	return 0;
+}
+
+Размеры 15-ти параллелепипедов (длина, ширина, высота) хранятся в трех массивах. Определить  минимальный объем фигуры.
+#include<iostream>
+#include<ctime>
+#include<cmath>
+using namespace std;
+int main()
+{
+	setlocale(LC_ALL, "russian");
+
+	int n = 15;
+	int V[15];
+
+
+
+	int* A = new int[n];
+
+	//Первый массив
+
+	srand(time(NULL));
+	for (int i = 0; i < n; i++)
+	{
+		A[i] = 10 + rand() % 200;
+
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+
+		cout << "[" << i + 1 << "] = " << A[i] << endl;
+
+
+	}
+
+	cout << endl;
+	// Второй массив
+
+	int* B = new int[n];
+
+
+
+	srand(time(NULL));
+	for (int i = 0; i < n; i++)
+	{
+		B[i] = 1 + rand() % 200;
+
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+
+		cout << "[" << i + 1 << "] = " << B[i] << endl;
+
+
+	}
+	cout << endl;
+	//Третий массив
+
+	int* C = new int[n];
+
+
+
+	srand(time(NULL));
+	for (int i = 0; i < n; i++)
+	{
+		C[i] = 15 + rand() % 200;
+
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+
+		cout << "[" << i + 1 << "] = " << C[i] << endl;
+
+
+	}
+
+	int min = A[0]*B[0]*C[0];
+
+	for (int i = 1; i < n; i++) {
+		V[i] = A[i] * B[i] * C[i];
+		if (V[i] < min) {
+			min = V[i];
+		}
+	}
+
+	
+		
+	
+	cout << "\n\n"<<" Наименьший из полученных объемов: "<< min;
+
+
+	return 0;
+}

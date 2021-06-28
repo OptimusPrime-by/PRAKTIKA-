@@ -1,0 +1,178 @@
+Дан двумерный массив целых чисел. Для каждого его столбца выяснить: 
+а) имеются ли в нем элементы, большие некоторого числа d.
+б) имеются ли в нем нечетные элементы.
+
+
+
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+int main()
+{
+	setlocale(LC_ALL, "russian");
+	int m, n;
+	cout << "Введите количество строк и столбцов массива: ";
+	cin >> n >> m;
+	int** array = new int* [n];
+	for (int i = 0; i < n; i++) {
+		array[i] = new int[m];
+	}
+
+	cout << "Введите массив: ";
+	for (int i = 0; i < n; i++) {
+		for (int k = 0; k < m; k++) {
+			cin >> array[i][k];
+		}
+	}
+
+	for (int i = 0; i < n; i++) {
+		for (int k = 0; k < m; k++) {
+			cout << setw(5) << array[i][k] << " ";
+		}
+		cout << endl;
+	}
+
+
+
+	for (int k = 0; k < m; k++) {
+		bool is_odd_found = 0;
+		for (int i = 0; !is_odd_found && i < n; i++) {
+			if (array[i][k] % 2 != 0) {
+				cout << "В столбце " << k + 1 << " есть нечётные элементы\n";
+				is_odd_found = 1;
+			}
+		}
+		if (!is_odd_found) {
+			cout << "В столбце " << k + 1 << " нет нечётных элементов\n";
+		}
+	}
+	cout << endl;
+
+	int d;
+	cout << "Введите число d: ";
+	cin >> d;
+	for (int k = 0; k < m; k++) {
+		bool is_greater_exist = 0;
+		for (int i = 0; !is_greater_exist && i < n; i++) {
+			if (array[i][k] > d) {
+				cout << "В столбце есть элемент, больший чем b\n";
+				is_greater_exist = 1;
+			}
+		}
+		if (!is_greater_exist) {
+			cout << "В столбце нет элемента, большего чем b\n";
+		}
+	}
+	cout << endl;
+
+	system("pause");
+	return 0;
+}
+
+Дан двумерный массив целых чисел
+ Сформировать одномерный массив, каждый элемент которого равен первому четному элементу
+ соответствующего столбца двумерного массива (если такого элемента в строке нет, то он равен нулю)
+
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+	int m, n;
+	cout << "Введите количество строк и столбцов массива: ";
+	cin >> n >> m;
+	int** array = new int* [n];
+	for (int i = 0; i < n; i++) {
+		array[i] = new int[m];
+	}
+
+	cout << "Введите массив: ";
+	for (int i = 0; i < n; i++) {
+		for (int k = 0; k < m; k++) {
+			cin >> array[i][k];
+		}
+	}
+
+	for (int i = 0; i < n; i++) {
+		for (int k = 0; k < m; k++) {
+			cout << setw(5) << array[i][k] << " ";
+		}
+		cout << endl;
+	}
+
+	int* array2 = new int [m] {0};
+	for (int i = 0; i < m; i++) {
+		bool is_found = 0;
+		for (int k = 0; k < n; k++) {
+			if (!is_found && array[k][i] % 2 == 0) {
+				array2[i] = array[k][i];
+				is_found = 1;
+			}
+		}
+	}
+
+	cout << endl;
+	for (int k = 0; k < m; k++) {
+		cout << setw(5) << array2[k] << " ";
+	}
+	cout << endl;
+
+
+	system("pause");
+	return 0;
+}
+
+Известны стоимость и «возраст» каждой из 20-ти моделей легковых автомобилей. 
+Найти среднюю стоимость автомобилей, «возраст» которых превышает 6 лет. 
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+int main()
+{
+	int amount = 20;
+	setlocale(LC_ALL, "Russian");
+	int* cost = new int[amount];
+	int* age = new int[amount];
+
+	srand(time(NULL));
+	for (int i = 0; i < amount; i++)
+	{
+		cost[i] = rand() % 1000;
+		age[i] = 1 + rand() % 24;
+	}
+	/*for (int i = 0; i < amount; i++) {
+		cout << "Введите стоимость и \"возраст\" " << i+1 << "-го автомобиля: ";
+		cin >> cost[i] >> age[i];
+	}*/
+
+	cout << "Стоимость и \"возраст\" автомобилей: \n";
+
+	for (int i = 0; i < amount; i++) {
+		cout << setw(4) << cost[i] << " ";
+	}
+	cout << endl;
+	for (int i = 0; i < amount; i++) {
+		cout << setw(4) << age[i] << " ";
+	}
+	cout << endl;
+
+	int summary_cost = 0;
+	int moreThanSixYears_Amount = 0;
+	for (int i = 0; i < amount; i++) {
+		if (age[i] > 6) {
+			summary_cost += cost[i];
+			moreThanSixYears_Amount++;
+		}
+	}
+	cout << "Средняя стоимость автомобилей старше 6 лет: " << summary_cost / moreThanSixYears_Amount << endl;
+
+	system("pause");
+	return 0;
+}

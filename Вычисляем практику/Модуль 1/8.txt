@@ -1,0 +1,144 @@
+Имеется файл, в котором записаны 12 вещественных чисел. Переписать все числа файла в массив в том же порядке
+#include <iostream>
+#include <fstream>
+#include <iomanip>
+
+using namespace std;
+
+int main()
+{
+    setlocale(LC_ALL, "Rus");
+
+    int size = 12;
+    double* array = new double[size];
+
+    ifstream fin;
+    fin.open("12_numbers.txt");
+
+    if (fin.is_open()) {
+        for (int i = 0; i < size; i++) {
+            fin >> array[i];
+        };
+
+        for (int i = 0; i < size; i++) {
+            cout << setprecision(10) << array[i] << " ";;
+        };
+        cout << endl;
+    }
+    else {
+        cout << "Ошибка при открытии файла!\n";
+    }
+
+    system("pause");
+    return 0;
+2.Имеются два файла, элементами которого являются числа. Получить третий файл, 
+в котором записаны сначала числа из первого файла, а затем – из второго.
+ Порядок следования числа сохраняется.
+#include <iostream>
+#include <fstream>
+#include <iomanip>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+    setlocale(LC_ALL, "Rus");
+
+    string filename1 = { "1.txt" };
+    string filename2 = { "2.txt" };
+    string filename3 = { "3.txt" };
+
+    ifstream fin;
+
+    ofstream fout;
+    fout.open(filename3);
+
+    if (fout.is_open()) {
+        fin.open(filename1);
+        if (fin.is_open()) {
+            while (!fin.eof()) {
+                string temp;
+                getline(fin, temp);
+                fout << temp << endl;
+                cout << temp << endl;
+            }
+            fin.close();
+        }
+        else {
+            cout << "Ошибка при открытии файла " << filename1 << "!\n";
+        }
+        fin.open(filename2);
+        if (fin.is_open()) {
+            while (!fin.eof()) {
+                string temp;
+                getline(fin, temp);
+                fout << temp << endl;
+                cout << temp << endl;
+            }
+            fin.close();
+        }
+        else {
+            cout << "Ошибка при открытии файла " << filename2 << "!\n";
+        }
+        fout.close();
+    }
+    else {
+        cout << "Ошибка при открытии файла " << filename3 << "!\n";
+    }
+
+    system("pause");
+    return 0;
+}
+
+3.
+Имеется текстовый файл. Переписать его строки в другой файл. Порядок 
+строк во втором файле должен совпадать с порядком строк в заданном файле.
+
+
+#include <iostream>
+#include <fstream>
+#include <iomanip>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+    setlocale(LC_ALL, "Rus");
+
+    string filename1 = { "input.txt" };
+    string filename2 = { "output.txt" };
+
+    ifstream fin;
+    ofstream fout;
+    fout.open(filename2);
+
+    if (fout.is_open()) {
+        fin.open(filename1);
+
+        if (fin.is_open()) {
+            cout << "Начато копирование из файла " << filename1 << " в файл " << filename2 << endl;
+            while (!fin.eof()) {
+                string temp;
+                getline(fin, temp);
+                fout << temp << endl;
+                //cout << temp << endl;
+            }
+            cout << "Строки переписаны из файла " << filename1 << " в файл " << filename2 << endl;
+            fin.close();
+        }
+        else {
+            cout << "Ошибка при открытии файла " << filename1 << "!\n";
+        }
+        fout.close();
+    }
+    else {
+        cout << "Ошибка при открытии файла " << filename2 << "!\n";
+    }
+
+    system("pause");
+    return 0;
+}
+
+
